@@ -1,0 +1,39 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: greet-me
+  labels:
+    app: greet-me
+spec:
+  selector:
+    matchLabels:
+      pod: greet-me
+  template:
+    metadata:
+      labels:
+        pod: greet-me
+    spec:
+      containers:
+        - name: greet-me-image
+          image: siegfredrodriguez/greet-me
+          imagePullPolicy: Always
+          ports:
+            - containerPort: 8080
+              name: greet-port
+
+---
+
+apiVersion: v1
+kind: Service
+metadata:
+  name: greet-me
+  labels:
+    app: greet-me
+spec:
+  selector:
+    pod: greet-me
+  ports:
+    - port: 80
+      targetPort: greet-port
+      protocol: TCP
+
