@@ -1,0 +1,11 @@
+apiVersion: v1
+kind: Pod
+metadata:
+  name: probe
+  labels:
+    app: probe
+spec:
+  containers:
+    - name: probe
+      image: siegfredrodriguez/utility-probe
+      imagePullPolicy: Always
